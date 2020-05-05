@@ -10,27 +10,25 @@ echo "height: " .  $height . "<br /><br />";
 // loop over pixels get offset from white pixels
 $chars = [];
 $offset = 0;
+$lastFound = 0;
 for ($y = 0; $y <= $height-1; $y++)
 {
 
-	for ($x = 0; $x <= $width-1; $x++)
-	{
+  for ($x = 0; $x <= $width-1; $x++)
+  {
 
-		$color = imagecolorat($image, $x, $y);
-		if($color == 1)
-		{
-      echo $offset .' : ' . chr($offset + 1) . '<br />';
-      array_push($chars, chr($offset + 1));
+    $color = imagecolorat($image, $x, $y);
+    if($color == 1)
+    {
+      //echo $offset .' : ' . chr($offset - $lastFound) . '<br />';
+      array_push($chars, chr($offset - $lastFound));
 
-			// reset offset when white pixel is found
-			$offset = 0;
-		}
-		else
-		{
-			$offset++;
-		}
+      // set new lastfound
+      $lastFound = $offset;
+    }
+    $offset++;
 
-	}
+  }
 }
 
   // create array with morse
@@ -241,7 +239,7 @@ for ($y = 0; $y <= $height-1; $y++)
         $letter =  'Z';
         break;
       default :
-        $letter = ' ';
+        $letter = '';
         break;
     }
     $answer = $answer . $letter;
