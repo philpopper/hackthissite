@@ -38,7 +38,9 @@ foreach($chars as $char)
   $morse_string = $morse_string . $char;
 }
 
-//echo '.- / - . ... -<br />';
+// TODO: "a test" would be encoded as ".- / - . ... -" => make test!!
+
+echo $morse_string . '<br />';
 
 $morse_array = explode(' ', $morse_string);
 
@@ -59,7 +61,7 @@ foreach($morse_array as $code)
     case '-.-.' :
       $letter =  'c';
       break;
-    case '--.' :
+    case '-..' :
       $letter =  'd';
       break;
     case '.' :
@@ -242,6 +244,9 @@ foreach($morse_array as $code)
   }
   $answer = $answer . $letter;
 }
+
+$answer = trim($answer);
+
 echo $answer;
 
 ?>
